@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AdminUserSreen extends StatefulWidget {
-  const AdminUserSreen({super.key, this.userid});
+  const AdminUserSreen({super.key, required this.userid});
 final userid;
 
   @override
@@ -115,8 +115,12 @@ class _AdminUserSreenState extends State<AdminUserSreen> {
                           child: Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: TextFormField(
+                              readOnly: true,
+                              controller: TextEditingController(
+                                text: snapshot.data?["Phone"]
+                              ),
                               decoration: InputDecoration(
-                                  border: InputBorder.none, labelText: '0000000000'),
+                                  border: InputBorder.none,),
                             ),
                           ),
                         ),
@@ -124,7 +128,7 @@ class _AdminUserSreenState extends State<AdminUserSreen> {
                           height: 20,
                         ),
                         Text(
-                          "Email assress",
+                          "Email address",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -144,8 +148,12 @@ class _AdminUserSreenState extends State<AdminUserSreen> {
                           child: Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: TextFormField(
+                              readOnly: true,
+                              controller: TextEditingController(
+                                text: snapshot.data?["Email"]
+                              ),
                               decoration: InputDecoration(
-                                  border: InputBorder.none, labelText: 'Example@email.com'),
+                                  border: InputBorder.none, ),
                             ),
                           ),
                         ),
@@ -153,28 +161,94 @@ class _AdminUserSreenState extends State<AdminUserSreen> {
                     ),
                   ),
                   SizedBox(height: 100,),
+                  snapshot.data?['status']==0 ?
                   Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        height: 50,
-                        width: 150,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.blue),
-                        child: Center(child: Text("Accept",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),)),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            accept();
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.blue),
+                          child: Center(child: Text("Accept",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),)),
+                        ),
                       ),
-                      Container(
-                        height: 50,
-                        width: 150,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.redAccent),
-                        child: Center(child: Text("reject",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),)),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            reject();
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.redAccent),
+                          child: Center(child: Text("reject",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),)),
+                        ),
                       )
                     ],
                   )
-                ],
+                      : snapshot.data!['status'] == 1
+                      ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.blue),
+                      child: Center(
+                          child: Text(
+                            "Accept",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white),
+                          )),
+                    ),
+                  )
+                      : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.redAccent),
+                      child: Center(
+                          child: Text(
+                            "reject",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white),
+                          )),
+                    ),
+                  )
+
+
+
+                ]
               );
             }
           ),
         ),
       ),
     );
+  }
+  accept() async{
+    await FirebaseFirestore.
+    instance.collection("userSignup").doc(
+      widget.userid).update({'status': 1});
+
+  }
+  reject()async{
+    await FirebaseFirestore.
+    instance.collection('userSignup').
+    doc(widget.userid).update({'status': 2});
   }
 }
