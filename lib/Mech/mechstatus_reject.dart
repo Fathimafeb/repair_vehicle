@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Mechstatus_reject extends StatefulWidget {
-  const Mechstatus_reject({super.key});
+  String? id;
+  String?name;
+  String?place;
+  String?service;
+
+   Mechstatus_reject({super.key,required this.id,
+  required this.name,
+  required this.place,
+  required this.service, });
 
   @override
   State<Mechstatus_reject> createState() => _Mechstatus_rejectState();
 }
+int selectedoption=1;
+
 
 class _Mechstatus_rejectState extends State<Mechstatus_reject> {
+  final amount =TextEditingController();
   String groupValue="Completed";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +46,16 @@ class _Mechstatus_rejectState extends State<Mechstatus_reject> {
                               width: 60,
                               child: Image.asset("Assets/Ellipse 11.png"),
                             ),
-                            Text("Name",style: TextStyle(fontSize: 20),)
+                            Text('${widget.name}')
                           ],
                         ),
                       ),
                       Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text("Fuel leaking",style: TextStyle(fontSize: 20),),
+                          Text("${widget.service}"),
                           Text("Date",style: TextStyle(fontSize: 20),),
                           Text("Time",style: TextStyle(fontSize: 20),),
-                          Text("Place",style: TextStyle(fontSize: 20),)
+                          Text("${widget.place}")
                         ],
                       ),
 
@@ -87,16 +100,34 @@ class _Mechstatus_rejectState extends State<Mechstatus_reject> {
                   ),
                 ),
                 Center(
-                  child: Container(
-                    height: 50,
-                    width: 280,
-                    decoration: BoxDecoration(color: Colors.blue[800],borderRadius: BorderRadius.circular(15)),
-                    child: Center(child: Text("Submit",style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold))),
+                  child: InkWell(
+                    onTap: () {
+                      Update();
+                      Update();
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 280,
+                      decoration: BoxDecoration(color: Colors.blue[800],borderRadius: BorderRadius.circular(15)),
+                      child: Center(child: Text("Submit",style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold))),
+                    ),
                   ),
                 )
               ]
           ),
         )
     );
+  }
+  Future<void>Update()async{
+    await FirebaseFirestore.instance.collection('failed').add(
+      {
+        'id':widget.id,
+        'reason':amount.text
+      }
+    );
+  }
+  Future<void>Updated() async{
+    await FirebaseFirestore.instance.collection('Userreq')
+        .doc(widget.id).update({'status':5});
   }
 }

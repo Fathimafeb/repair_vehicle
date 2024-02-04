@@ -45,12 +45,7 @@ class _UsermechreqState extends State<Usermechreq> {
                   ),
           ),
          actions: [
-           InkWell(onTap:() {
-             Navigator.push(context, MaterialPageRoute(builder: (context) {
-               return Notify();
-             },));
-           },
-               child: IconButton(onPressed: (){}, icon: Icon(Icons.notification_add_rounded,color: Colors.yellow,size:40,)))
+           IconButton(onPressed: (){}, icon: Icon(Icons.notification_add_rounded,color: Colors.yellow,size:40,))
          ],
         ),
         body:
@@ -59,12 +54,8 @@ class _UsermechreqState extends State<Usermechreq> {
           child: Column(
             children: [
               const Expanded(child:
-              TabBarView(children: [Center(child:Usermechlist(),
-
-              ),
-                Center(child:User_Requestlist(),
-
-                ),
+              TabBarView(children: [Usermechlist(),
+                User_Requestlist(),
 
               ])
               ),

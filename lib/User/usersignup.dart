@@ -209,6 +209,7 @@ class _UsersignupState extends State<Usersignup> {
           ),
                 InkWell(onTap:() {
                  signUp();
+
                 },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 30),

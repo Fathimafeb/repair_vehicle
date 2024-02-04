@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:repair_vehicle/admin/page3.dart';
+import 'package:repair_vehicle/admin/Admin_login.dart';
 
 
 class Page2 extends StatefulWidget {
@@ -78,7 +78,7 @@ class _Page2State extends State<Page2> {
                 child: TextButton(
                     onPressed: () {
                       Navigator.push(context,MaterialPageRoute(builder: (context) {
-                        return Page3();
+                        return Adminlogin();
                       },));
                     },
                     child: Text(

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:repair_vehicle/admin/home2.dart';
 import 'package:repair_vehicle/admin/homepage.dart';
 
 
-class Page3 extends StatefulWidget {
-  const Page3({super.key});
+class Adminlogin extends StatefulWidget {
+  const Adminlogin({super.key});
 
   @override
-  State<Page3> createState() => _Page3State();
+  State<Adminlogin> createState() => _AdminloginState();
 }
 
-class _Page3State extends State<Page3> {
+class _AdminloginState extends State<Adminlogin> {
   @override
+  final username =TextEditingController();
+
+  final password=TextEditingController();
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 192, 210, 224),
@@ -57,6 +62,9 @@ class _Page3State extends State<Page3> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: TextFormField(
+                        controller: username,
+                        validator: (value) {
+                        },
                         decoration: InputDecoration(
                             border: InputBorder.none, labelText: 'Username'),
                       ),
@@ -86,6 +94,10 @@ class _Page3State extends State<Page3> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: TextFormField(
+                        controller: password,
+                        validator:(value) {
+
+                        },
                         decoration: InputDecoration(
                             border: InputBorder.none, labelText: 'Username'),
                       ),
@@ -98,21 +110,21 @@ class _Page3State extends State<Page3> {
               height: 100,
             ),
             Center(
-              child: InkWell(onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Homepage();
-                },));
-              },
-                child: Container(
-                  height: 60,
-                  width: 220,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromARGB(255, 2, 74, 133)),
-                  child: Center(
+              child: Container(
+                height: 60,
+                width: 220,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromARGB(255, 2, 74, 133)),
+                child: Center(
+                  child: InkWell(
+                    onTap: () {
+                      adminlogin(context);
+                    },
                     child: Text(
                       "LOGIN",
                       style: TextStyle(color: Colors.white, fontSize: 20),
+
                     ),
                   ),
                 ),
@@ -122,5 +134,14 @@ class _Page3State extends State<Page3> {
                   ),
           )),
     );
+  }
+  void adminlogin(BuildContext context){
+    if(username.text=='admin'&& password.text=='admin123'){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(),));
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Invalid username or password'))
+      );
+    }
   }
 }

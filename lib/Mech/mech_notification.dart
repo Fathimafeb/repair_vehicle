@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MechNotification extends StatefulWidget {
@@ -13,40 +14,43 @@ class _MechNotificationState extends State<MechNotification> {
     return Scaffold(
       appBar: AppBar(backgroundColor: Color(0xFFE8F1FF),
         leading: Icon(Icons.arrow_back_ios),
-        title: Center(child: Text("Notification")),
+        centerTitle: true,
+        title: Text("Notification"),
 
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Column(children: [
-            Container(
-              height: 120,
-              width: 330,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(color: Colors.black, blurRadius: 5),
-                  ]),
-              child:Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Admin notification",style: TextStyle(fontSize:15,color: Colors.grey),),
-                        Text("10:00 am",style: TextStyle(fontSize:18,color: Colors.black),)
-                      ],
-                    ),
-                  ),
-                  
-                ],
-              )
-            ),
-          ]),
-        ),
-      ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("Notification").snapshots(),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState==ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          if(snapshot.hasError){
+            return Text("Error${snapshot.hasError}");
+          }
+
+          if(snapshot.data!.docs.isEmpty){
+            return Center(child: Text('No Notification',style: TextStyle(
+                fontWeight: FontWeight.w500,fontSize: 24,color: Colors.grey),));
+          }
+          final user =snapshot.data?.docs??[];
+          return ListView.builder(itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 50,right: 50,top: 10,bottom: 10),
+              child: Container(
+                height: 100,
+                width: double.infinity,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),boxShadow: [BoxShadow(blurRadius: 2)],color: Colors.white),
+                child: ListTile(
+                  leading: Text(user[index]['Matter']),
+                  trailing: Text(user[index]['Content']),
+                )
+              ),
+            );
+          },
+          itemCount: user.length,
+          );
+        }
+      )
     );
   }
 }

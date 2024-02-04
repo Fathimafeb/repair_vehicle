@@ -1,7 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:repair_vehicle/Mech/mechstatus_reject.dart';
 
 class Mech_status extends StatefulWidget {
-  const Mech_status({super.key});
+  String? id;
+  String? name;
+  String? place;
+  String? service;
+  var status;
+   Mech_status({super.key,
+     required this.id,
+  required this.name,
+    required this.place,
+    required this.service,
+    required this.status,
+  });
 
   @override
   State<Mech_status> createState() => _Mech_statusState();
@@ -9,6 +22,8 @@ class Mech_status extends StatefulWidget {
 
 class _Mech_statusState extends State<Mech_status> {
   String groupValue="Completed";
+  final payment =TextEditingController();
+  bool navigateTopage=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +48,16 @@ class _Mech_statusState extends State<Mech_status> {
                           width: 60,
                           child: Image.asset("Assets/Ellipse 11.png"),
                         ),
-                        Text("Name",style: TextStyle(fontSize: 20),)
+                        Text("${widget.name}",style: TextStyle(fontSize: 20),)
                       ],
                     ),
                   ),
                   Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("Fuel leaking",style: TextStyle(fontSize: 20),),
-                      Text("Date",style: TextStyle(fontSize: 20),),
+                      Text("${widget.service}"),
+                      Text("Date"),
                       Text("Time",style: TextStyle(fontSize: 20),),
-                      Text("Place",style: TextStyle(fontSize: 20),)
+                      Text("${widget.place}",style: TextStyle(fontSize: 20),)
                     ],
                   ),
 
@@ -62,8 +77,23 @@ class _Mech_statusState extends State<Mech_status> {
                 SizedBox(width: 20,),
                 Radio(value: "Not Completed", groupValue: groupValue, onChanged: (value){
                   setState(() {
+                    navigateTopage=true;
                     groupValue=value!;
                   });
+                  if(navigateTopage){
+                    Navigator.push(
+                      context,MaterialPageRoute(builder: (context) => Mechstatus_reject(
+                      id:widget.id,
+                      name: widget.name,
+                      place: widget.place,
+                      service: widget.service,
+                    ),
+
+
+
+
+                    ),);
+                  }
 
                 }),
                 const Text("Not Completed")
@@ -82,20 +112,38 @@ class _Mech_statusState extends State<Mech_status> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Center(child: Text(" ₹2000/-",style: TextStyle(fontSize: 25),)),
+                child: Center(child:TextFormField(controller: payment,)),
               ),
             ),
             Center(
-              child: Container(
-                height: 50,
-                width: 280,
-                decoration: BoxDecoration(color: Colors.blue[800],borderRadius: BorderRadius.circular(15)),
-                child: Center(child: Text("Submit",style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold))),
+              child: InkWell(
+                onTap: () {
+                  Payment();
+                  Update();
+
+                },
+                child: Container(
+                  height: 50,
+                  width: 280,
+                  decoration: BoxDecoration(color: Colors.blue[800],borderRadius: BorderRadius.circular(15)),
+                  child:Text(''),
+                ),
               ),
             )
         ]
       ),
       )
     );
+  }
+  Future<void>Payment()async{
+    await FirebaseFirestore.instance.collection('payment').add({
+      'payment':payment.text,
+      'name':widget.name,
+      'id':widget.id
+    });
+  }
+  Future<void>Update()async{
+    await FirebaseFirestore.instance.collection('Userreq')
+        .doc(widget.id).update({"status":3});
   }
 }

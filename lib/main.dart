@@ -1,19 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:repair_vehicle/Bottomnav2.dart';
-import 'package:repair_vehicle/Mech/mechsignup.dart';
-import 'package:repair_vehicle/admin/homepage.dart';
+import 'package:repair_vehicle/Mech/Servicemech.dart';
+import 'package:repair_vehicle/Mech/mech_servicehome.dart';
+import 'package:repair_vehicle/Mech/mechstatus_completed.dart';
+import 'package:repair_vehicle/Mech/mechstatus_reject.dart';
+import 'package:repair_vehicle/User/Userprofile.dart';
+import 'package:repair_vehicle/User/user_mech_request_list.dart';
+import 'package:repair_vehicle/User/user_rating.dart';
 
-import 'User/usersignup.dart';
-import 'admin/admin_mech.dart';
+import 'Mech/mech_home.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +47,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:Homepage(),
+      home:Userprofile(),
     );
   }
 }

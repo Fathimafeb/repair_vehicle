@@ -1,5 +1,11 @@
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:repair_vehicle/User/user_mech_request_list.dart';
 import 'package:repair_vehicle/User/usermechlist.dart';
+import 'package:repair_vehicle/User/usersignup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Userlogin extends StatefulWidget {
@@ -10,6 +16,15 @@ class Userlogin extends StatefulWidget {
 }
 
 class _UserloginState extends State<Userlogin> {
+  var Username =TextEditingController();
+  var Password=TextEditingController();
+  final formkey =GlobalKey<FormState>();
+  String id='';
+  String name='';
+  String email='';
+  String phone='';
+  String pass='';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +70,7 @@ class _UserloginState extends State<Userlogin> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: TextFormField(
+                      controller: Username,
                       decoration: InputDecoration(
                           border: InputBorder.none, labelText: 'Username'),
                     ),
@@ -85,6 +101,7 @@ class _UserloginState extends State<Userlogin> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: TextFormField(
+                      controller: Password,
                       decoration: InputDecoration(
                           border: InputBorder.none, labelText: 'Enter password'),
                     ),
@@ -99,11 +116,11 @@ class _UserloginState extends State<Userlogin> {
 
           Column(mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              InkWell(onTap:() {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Usermechlist();
-                },));
-              },
+              InkWell(
+                onTap: () {
+                  userLogin();
+
+                },
                 child: Container(
                   height: 60,
                   width: 220,
@@ -148,5 +165,36 @@ class _UserloginState extends State<Userlogin> {
         ],
       ),
     );
+  }
+  void userLogin()async{
+   
+    final user = await FirebaseFirestore.instance.
+    collection('userSignup')
+        .where('Username',isEqualTo: Username.text)
+        .where('Password',isEqualTo: Password.text)
+        .where('status',isEqualTo: 1)
+        .get();
+
+    if(user.docs.isNotEmpty){
+      id = user.docs[0].id;
+      name= user.docs[0]['Username'];
+      email= user.docs[0]['Email'];
+      phone= user.docs[0]['Phone'];
+      pass=user.docs[0]['Password'];
+      SharedPreferences data= await SharedPreferences.getInstance();
+      data.setString('id', id);
+      data.setString('name', name);
+      data.setString('email', email);
+      data.setString('phone', phone);
+
+      print('sucees');
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return Usermechreq();
+      },));
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Username and password error",style: TextStyle(color: Colors.red),),
+      ));
+    }
   }
 }

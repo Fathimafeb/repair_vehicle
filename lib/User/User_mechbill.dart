@@ -5,7 +5,7 @@ import 'package:repair_vehicle/User/user_payment.dart';
 import 'package:repair_vehicle/User/user_rating.dart';
 
 class User_mechbill extends StatefulWidget {
-  const User_mechbill({super.key});
+  const User_mechbill({super.key, required name, required String id});
 
   @override
   State<User_mechbill> createState() => _User_mechbillState();

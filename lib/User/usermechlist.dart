@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:repair_vehicle/User/user_mech_details.dart';
 
@@ -10,166 +11,109 @@ class Usermechlist extends StatefulWidget {
 }
 
 class _UsermechlistState extends State<Usermechlist> {
+
+
+
+ 
+
   @override
+
   Widget build(BuildContext context) {
-    return  Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          height: 120,
-          width: double.infinity,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Color.fromARGB(255, 192, 210, 224)),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    InkWell(onTap:() {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return User_mechdeatails();
-                      },));
-                    },
-                      child: Container(
-                        height: 60,
-                        width: 60,
-                        child: Image.asset("Assets/Ellipse 11.png"),
-                      ),
-                    ),
-                    Text("Name",style: TextStyle(fontSize: 20),)
-                  ],
+    return  StreamBuilder(
+      stream:  FirebaseFirestore.instance.collection('mechSignup').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text('Error:${snapshot.error}');
+        }
+        final user = snapshot.data?.docs ?? [];
+        return ListView.builder(
+
+            itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return User_mechdeatails(
+
+                  name:user[index]['Username'],
+                    contact:user[index]['Phone'],
+                    exp:user[index]['Experience'],
+
+
+
+                  );
+                },));
+              },
+              child: Container(height:100,width: double.infinity,decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), color: Color.fromARGB(255, 192, 210, 224)
+              ),
+                child: ListTile(
+                   leading: Column(
+                     children: [
+                       Image.asset("Assets/bussiness-man 2.png",height: 32,),
+                       Text(user[index]['Username']),
+              
+                     ],
+                   ),
+                  title: Padding(
+                    padding: const EdgeInsets.only(left: 40),
+                    child: Text(user[index]['Experience']),
+                  ),
+                   subtitle: Padding(
+                     padding: const EdgeInsets.only(right: 40),
+                     child: Column(
+                       children: [
+                         //Text(user[index]['service']),
+                         StreamBuilder(
+                           stream: FirebaseFirestore.instance.collection('Services').snapshots(),
+                           builder: (context, snapshot) {
+                             if(snapshot.connectionState==ConnectionState.waiting)
+                               return Center(
+                                   child: CircularProgressIndicator());
+                               if(snapshot.hasError)
+                                 return Text('Failed');
+                                 final data= snapshot.data?.docs??[];
+                                 return Text('${data[index]['service']}'
+                                 );
+
+                             }
+                             ),
+                              Container(
+                               height: 30,
+                               width: 100,
+                               decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(20),
+                                   color: Colors.green),
+                               child: Center(
+                                   child: Text(
+                                     "Available",
+                                     style: TextStyle(color: Colors.white),
+                                   )),
+
+
+
+
+                         )
+
+
+                       ],
+                     ),
+                   ),
+              
                 ),
               ),
-              Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("2+year experience",style: TextStyle(fontSize: 18),),
-                  Text("Fuel leaking",style: TextStyle(fontSize: 18),),
-                  Container(
-                    height: 30,
-                    width: 100,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.green),
-                    child: Center(child: Text("Available",style: TextStyle(color: Colors.white),)),
-                  )
-                 ]
-              ),
+            ),
+          );
+        },
+          itemCount: user.length,
 
-            ],
-          ),
-        ),
-        Container(
-          height: 120,
-          width: double.infinity,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Color.fromARGB(255, 192, 210, 224)),
-          child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20,),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      child: Image.asset("Assets/Ellipse 11.png"),
-                    ),
-                    Text("Name",style: TextStyle(fontSize: 20),)
-                  ],
-                ),
-              ),
-              Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("1+year experience",style: TextStyle(fontSize: 18),),
-                  Text("Battery check",style: TextStyle(fontSize: 18),),
-                  Container(
-                    height: 30,
-                    width: 100,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red),
-                    child: Center(child: Text("Unavailable",style: TextStyle(color: Colors.white),)),
-                  )
+        );
 
-
-                ],
-              ),
-
-            ],
-          ),
-        ),
-        Container(
-          height: 120,
-          width: double.infinity,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Color.fromARGB(255, 192, 210, 224)),
-          child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      child: Image.asset("Assets/Ellipse 11.png"),
-                    ),
-                    Text("Name",style: TextStyle(fontSize: 20),)
-                  ],
-                ),
-              ),
-              Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment:CrossAxisAlignment.start ,
-                children: [
-                  Text("1year experience",style: TextStyle(fontSize: 18),),
-                  Text("Brake pad replacement",style: TextStyle(fontSize: 18),),
-                  Container(
-                    height: 30,
-                    width: 100,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red),
-                    child: Center(child: Text("Unavailable",style: TextStyle(color: Colors.white),)),
-                  )
-
-
-                ],
-              ),
-
-            ],
-          ),
-        ),
-        Container(
-          height: 120,
-          width: double.infinity,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Color.fromARGB(255, 192, 210, 224)),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      child: Image.asset("Assets/Ellipse 11.png"),
-                    ),
-                    Text("Name",style: TextStyle(fontSize: 20),)
-                  ],
-                ),
-              ),
-              Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("1year experience",style: TextStyle(fontSize: 18),),
-                    Text("Tyre changing and repair",style: TextStyle(fontSize: 18),),
-                    Container(
-                      height: 30,
-                      width: 100,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.green),
-                      child: Center(child: Text("Available",style: TextStyle(color: Colors.white),)),
-                    )
-                  ]
-              ),
-
-            ],
-          ),
-        ),
-
-
-      ],
+      }
     );
   }
 }

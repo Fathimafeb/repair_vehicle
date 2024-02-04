@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Mech_failed extends StatefulWidget {
-  const Mech_failed({super.key});
+  const Mech_failed({super.key, required String id});
 
   @override
   State<Mech_failed> createState() => _Mech_failedState();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../admin/admin_mech.dart';
+import 'admin_mech.dart';
 
 
 class Mechaniclist extends StatefulWidget {
@@ -37,7 +37,7 @@ class _MechaniclistState extends State<Mechaniclist> {
           }
           final user=snapshot.data?.docs??[];
           return ListView.builder(
-              shrinkWrap: true,
+              //shrinkWrap: true,
 
               itemBuilder: (context,index){
                 return Padding(
