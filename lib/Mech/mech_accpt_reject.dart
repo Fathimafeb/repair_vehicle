@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:repair_vehicle/Mech/mech_home.dart';
 import 'mechstatus_completed.dart';
 import 'mechstatus_reject.dart';
 
@@ -31,7 +32,13 @@ class _MechaccptState extends State<Mechaccpt> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.arrow_back_ios),
+          leading: InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return Mech_home();
+              },));
+            },
+              child: Icon(Icons.arrow_back_ios)),
         ),
         body: Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),

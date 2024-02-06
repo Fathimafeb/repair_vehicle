@@ -24,25 +24,28 @@ class _UsermechreqState extends State<Usermechreq> {
               return Userprofile();
             },));
           },
-            child: Container(
-              width: 80,
-              height: 80,
-              decoration: ShapeDecoration(
-                color: Color(0xFFE8F1FF),
-                shape: OvalBorder(),
-
-              ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Container(
-                width:100,
-                height: 100,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("Assets/Ellipse 1.png",),fit: BoxFit.fill
-                  ),
-                ),
-              )
+                width: 80,
+                height: 80,
+                decoration: ShapeDecoration(
+                  color: Color(0xFFE8F1FF),
+                  shape: OvalBorder(),
 
+                ),
+                child: Container(
+                  width:100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("Assets/Ellipse 1.png",),fit: BoxFit.fill
+                    ),
                   ),
+                )
+
+                    ),
+            ),
           ),
          actions: [
            IconButton(onPressed: (){}, icon: Icon(Icons.notification_add_rounded,color: Colors.yellow,size:40,))

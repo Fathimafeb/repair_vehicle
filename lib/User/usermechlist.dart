@@ -26,7 +26,7 @@ class _UsermechlistState extends State<Usermechlist> {
           return CircularProgressIndicator();
         }
         if (snapshot.hasError) {
-          return Text('Error:${snapshot.error}');
+          return Text('failed');
         }
         final user = snapshot.data?.docs ?? [];
         return ListView.builder(
@@ -38,7 +38,7 @@ class _UsermechlistState extends State<Usermechlist> {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return User_mechdeatails(
-
+                    id:user[index].id,
                   name:user[index]['Username'],
                     contact:user[index]['Phone'],
                     exp:user[index]['Experience'],
@@ -55,13 +55,13 @@ class _UsermechlistState extends State<Usermechlist> {
                    leading: Column(
                      children: [
                        Image.asset("Assets/bussiness-man 2.png",height: 32,),
-                       Text(user[index]['Username']),
+                       Text('${user[index]['Username']}',)
               
                      ],
                    ),
                   title: Padding(
                     padding: const EdgeInsets.only(left: 40),
-                    child: Text(user[index]['Experience']),
+                    child: Text("${user[index]['Experience']}"),
                   ),
                    subtitle: Padding(
                      padding: const EdgeInsets.only(right: 40),

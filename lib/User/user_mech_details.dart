@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:repair_vehicle/User/user_mech_request_list.dart';
 
 class User_mechdeatails extends StatefulWidget {
 
@@ -10,12 +11,14 @@ class User_mechdeatails extends StatefulWidget {
   String? contact;
   String? exp;
 
+  var id;
+
 
 
 
    User_mechdeatails({super.key,required this.name,
      required this.contact,
-     required this.exp,
+     required this.exp, required this. id,
 
    });
 
@@ -35,22 +38,29 @@ var place=TextEditingController();
     return Scaffold(
 
       appBar: AppBar(backgroundColor:  Color.fromARGB(255, 192, 210, 224),
-        leading: Icon(Icons.arrow_back_ios),
+        leading: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Usermechreq();
+            },));
+          },
+            child: Icon(Icons.arrow_back_ios)),
         centerTitle: true,
         title: Text("Needed service"),
       ),
       body: Center(
-        child:SingleChildScrollView(scrollDirection: Axis.vertical,
-          child: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('mechSignup').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting)
-                return CircularProgressIndicator();
-              if (snapshot.hasError)
-                return Text('Failed');
+        child:StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('mechSignup').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting)
+              return CircularProgressIndicator();
+            if (snapshot.hasError)
+              return Text('Failed');
 
 
-              return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            return SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                       width: 140,
@@ -127,7 +137,7 @@ var place=TextEditingController();
                       ),),
                   ),
 
-            Padding(
+                        Padding(
               padding: const EdgeInsets.only(left:40,right: 60),
               child: Container(
                 height: 40,
@@ -176,8 +186,9 @@ var place=TextEditingController();
                   },
                 )
               ),
-            ),
-            Padding(
+                        ),
+                        SizedBox(height: 20,),
+                        Padding(
               padding: const EdgeInsets.only(right:100),
               child: Text("Place                            ",style: TextStyle(
                 color: Colors.black,
@@ -235,9 +246,9 @@ var place=TextEditingController();
 
 
                 ],
-              );
-            }
-          ),
+              ),
+            );
+          }
         ),
         ),
       );

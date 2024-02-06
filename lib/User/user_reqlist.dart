@@ -46,7 +46,7 @@ class _User_RequestlistState extends State<User_Requestlist> {
                           InkWell(
                             onTap:() {
                               Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => User_mechbill(id: user[index].id, name: user[index]['name'],),));
+                                builder: (context) => User_mechbill(id: user[index].id, name: user[index]['name'],exp: user[index]['exp'],),));
                             },
                             child: Container(
                               height: 30,

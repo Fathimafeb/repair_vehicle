@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:repair_vehicle/User/user_mech_request_list.dart';
 import 'package:repair_vehicle/User/usermechlist.dart';
 import 'package:repair_vehicle/User/usersignup.dart';
+import 'package:repair_vehicle/admin/page2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -29,93 +30,104 @@ class _UserloginState extends State<Userlogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 192, 210, 224),
-      body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            height: 130,
-            width: 130,
-            child: Image.asset('Assets/tow 1 (1).png', fit: BoxFit.fill),
-          ),
-          Text(
-            'LOGIN',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-
-            ),
-          ),
-          Container(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Enter Username",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Container(
-                  height: 60,
-                  width: 330,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.grey, blurRadius: 5),
-                      ]),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: TextFormField(
-                      controller: Username,
-                      decoration: InputDecoration(
-                          border: InputBorder.none, labelText: 'Username'),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "Enter Password",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-
-                Container(
-                  height: 60,
-                  width: 330,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(color: Colors.grey, blurRadius: 5),
-                      ]),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: TextFormField(
-                      controller: Password,
-                      decoration: InputDecoration(
-                          border: InputBorder.none, labelText: 'Enter password'),
-                    ),
-                  ),
-                ),
-
-              ],
-            ),
-          ),
-
-
-
-          Column(mainAxisAlignment: MainAxisAlignment.start,
+      appBar: AppBar(backgroundColor:Color.fromARGB(255, 192, 210, 224),
+          leading: InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:(context) {
+                return Page2();
+              },));
+            },
+              child: Icon(Icons.arrow_back_ios)) ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Form(
+          key: formkey,
+          child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              Container(
+                height: 130,
+                width: 130,
+                child: Image.asset('Assets/tow 1 (1).png', fit: BoxFit.fill),
+              ),
+              Text(
+                'LOGIN',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+
+                ),
+              ),
+              Container(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Enter Username",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Container(
+                      height: 60,
+                      width: 330,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.grey, blurRadius: 5),
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: TextFormField(
+                          controller: Username,
+                          decoration: InputDecoration(
+                              border: InputBorder.none, labelText: 'Username'),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Text(
+                      "Enter Password",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+
+                    Container(
+                      height: 60,
+                      width: 330,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(color: Colors.grey, blurRadius: 5),
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: TextFormField(
+                          controller: Password,
+                          decoration: InputDecoration(
+                              border: InputBorder.none, labelText: 'Enter password'),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+
+
+
               InkWell(
                 onTap: () {
                   userLogin();
@@ -146,23 +158,30 @@ class _UserloginState extends State<Userlogin> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  Text(
-                    'Sign up',
-                    style: TextStyle(
-                      color: Color(0xFF2357D9),
-                      fontSize: 15,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return Usersignup();
+                      },));
+                    },
+                    child: Text(
+                      'Sign up',
+                      style: TextStyle(
+                        color: Color(0xFF2357D9),
+                        fontSize: 15,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
 
+                      ),
                     ),
                   )
                 ],
-              )
+              ),
+
+
             ],
           ),
-
-
-        ],
+        ),
       ),
     );
   }
@@ -187,10 +206,9 @@ class _UserloginState extends State<Userlogin> {
       data.setString('email', email);
       data.setString('phone', phone);
 
-      print('sucees');
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return Usermechreq();
-      },));
+
+      print('succes');
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Usermechreq(),));
     }else{
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Username and password error",style: TextStyle(color: Colors.red),),

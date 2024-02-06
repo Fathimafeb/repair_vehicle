@@ -57,7 +57,7 @@ class _AdminUserSreenState extends State<AdminUserSreen> {
 
                   ),
                   Text(snapshot.data!['Username'],style: TextStyle(fontWeight: FontWeight.bold,fontSize:20),),
-                  Text(snapshot.data!['Location'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                 // Text(snapshot.data!['Location'],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                   Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

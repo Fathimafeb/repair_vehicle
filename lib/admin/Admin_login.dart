@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:repair_vehicle/admin/home2.dart';
 import 'package:repair_vehicle/admin/homepage.dart';
+import 'package:repair_vehicle/admin/page2.dart';
 
 
 class Adminlogin extends StatefulWidget {
@@ -19,8 +20,16 @@ class _AdminloginState extends State<Adminlogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 192, 210, 224),
+      appBar: AppBar(leading: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Page2();
+          },));
+        },
+          child: Icon(Icons.arrow_back_ios)),backgroundColor:Color.fromARGB(255, 192, 210, 224) ,),
       body: Center(
           child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
