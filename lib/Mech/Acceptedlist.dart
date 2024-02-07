@@ -53,7 +53,8 @@ class _AcceptedlistsState extends State<Acceptedlists> {
                             "${user[0]['service']}", style: TextStyle(fontSize: 20),),
                           Text("Date", style: TextStyle(fontSize: 20),),
                           Text("Time", style: TextStyle(fontSize: 20),),
-                          Text("${user[0]['place']}", style: TextStyle(fontSize: 20),)
+                          Text("${user[0]['place']}", style: TextStyle(fontSize: 20),),
+
                         ],
                       ),
                      // Container(
@@ -149,6 +150,7 @@ class _AcceptedlistsState extends State<Acceptedlists> {
                   ),
                 ),
               ),
+              SizedBox(height: 20,)
             ],
           );
         }

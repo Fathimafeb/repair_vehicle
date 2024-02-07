@@ -16,6 +16,8 @@ class Mech_status extends StatefulWidget {
     required this.status,
   });
 
+  get username => null;
+
   @override
   State<Mech_status> createState() => _Mech_statusState();
 }
@@ -139,7 +141,8 @@ class _Mech_statusState extends State<Mech_status> {
     await FirebaseFirestore.instance.collection('payment').add({
       'payment':payment.text,
       'name':widget.name,
-      'id':widget.id
+      'id':widget.id,
+
     });
   }
   Future<void>Update()async{

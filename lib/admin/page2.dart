@@ -52,13 +52,13 @@ class _Page2State extends State<Page2> {
                   width: 320,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color.fromARGB(255, 2, 74, 133)),
+                      color: selectedOption==true?Colors.blue:Colors.white),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
                       "Mechanic",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: selectedOption==true?Colors.white:Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
@@ -76,13 +76,13 @@ class _Page2State extends State<Page2> {
                   height: 60,
                   width: 320,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10), color: Colors.white),
+                      borderRadius: BorderRadius.circular(10), color: selectedOption==false?Colors.blue:Colors.white),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
                       "User",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: selectedOption==false?Colors.white:Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),

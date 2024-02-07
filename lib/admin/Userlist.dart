@@ -52,7 +52,7 @@ class _UserlistState extends State<Userlist> {
                     title:Text( user[index]['Username']),
                     subtitle: Column(crossAxisAlignment:CrossAxisAlignment.start ,
                       children: [
-                        Text(user[index]['Email'],),
+
                       Text ( user[index]['Phone']),
                       Text ( user[index]['Email'],)
                       ],

@@ -39,60 +39,63 @@ class _RequestlistState extends State<Requestlist> {
                       child:
                     Padding(
                     padding: const EdgeInsets.all(10),
-                      child: Column(
-                  children: [
-                    Container(
-                        height: 150,
-                         width: double.infinity,
-                            decoration: BoxDecoration(
-                                 borderRadius: BorderRadius.circular(20),
-                                 color: Color.fromARGB(255, 192, 210, 224)),
-                             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                               children: [
-                                 Padding(
-                                  padding: const EdgeInsets.only(top: 30,left:5),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 60,
-                                       width: 60,
-                                       child: Image.asset("Assets/Ellipse 11.png"),
-                                       ),
-                                       Text(
-                                        "${userdata[index]['name']}",
+                      child: Container(
+                        child: Column(
+                                          children: [
+                                            Container(
+                          height: 150,
+                           width: double.infinity,
+                              decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(20),
+                                   color: Color.fromARGB(255, 192, 210, 224)),
+                               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                 children: [
+                                   Padding(
+                                    padding: const EdgeInsets.only(top: 30,left:5),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 60,
+                                         width: 60,
+                                         child: Image.asset("Assets/Ellipse 11.png"),
+                                         ),
+                                         Text(
+                                          "${userdata[index]['name']}",
+                                          style: TextStyle(fontSize: 20),
+                                        )
+                                       ],
+                                     ),
+                                  ),
+                                  Padding(
+                                     padding: const EdgeInsets.only(left:5, top: 20),
+                                     child: Column(
+                                       children: [
+                                         Text(
+                                           "${userdata[index]['service']}",
                                         style: TextStyle(fontSize: 20),
-                                      )
-                                     ],
-                                   ),
-                                ),
-                                Padding(
-                                   padding: const EdgeInsets.only(left:5, top: 20),
-                                   child: Column(
-                                     children: [
+                                          ),
                                        Text(
-                                         "${userdata[index]['service']}",
-                                      style: TextStyle(fontSize: 20),
-                  ),
-                                     Text(
-                  "${userdata[index]['contact']}",
+                                          "${userdata[index]['contact']}",
+                                           style: TextStyle(fontSize: 20),
+                                         ),
+                                         Text(
+                                           "",
+                                           style: TextStyle(fontSize: 20),
+                                        ),
+                                         Text(
+                                         "${userdata[index]['place']}",
                                          style: TextStyle(fontSize: 20),
-                                       ),
-                                       Text(
-                                         "",
-                                         style: TextStyle(fontSize: 20),
-                                      ),
-                                       Text(
-                                       "${userdata[index]['place']}",
-                                       style: TextStyle(fontSize: 20),
-                                       )
-                  ],
-                                ),
-                              )
-                             ],
-                           ),
-                           ),
-                         ],
-                       ),
+                                         )
+                                          ],
+                                  ),
+                                )
+                               ],
+                             ),
+                             ),
+
+                           ],
+                         ),
+                      ),
                     ),
 
                   );

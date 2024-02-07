@@ -40,7 +40,7 @@ class _NotifyState extends State<Notify> {
         padding: const EdgeInsets.only(top: 10,right: 20,left: 20),
         child: FutureBuilder(future: FirebaseFirestore.instance.collection("Notification").get(),builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting)
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           if (snapshot.hasError) return Text('error');
           final userdata=snapshot.data?.docs??[];
 

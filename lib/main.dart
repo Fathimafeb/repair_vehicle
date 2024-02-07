@@ -10,6 +10,8 @@ import 'package:repair_vehicle/User/user_mech_request_list.dart';
 import 'package:repair_vehicle/User/user_rating.dart';
 import 'package:repair_vehicle/User/usersignup.dart';
 import 'package:repair_vehicle/admin/Admin_login.dart';
+import 'package:repair_vehicle/admin/home2.dart';
+import 'package:repair_vehicle/admin/homepage.dart';
 import 'package:repair_vehicle/admin/page2.dart';
 
 import 'Mech/mech_home.dart';
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:Page2(),
+      home:Mech_home(),
     );
   }
 }

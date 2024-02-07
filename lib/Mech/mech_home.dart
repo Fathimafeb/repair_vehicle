@@ -58,32 +58,34 @@ class _Mech_homeState extends State<Mech_home> {
                     width: 300,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
                         color: Colors.grey[300]),
-                    child: TabBar(
-                      tabs: [
-                        Tab(
-                          child: Text("Requests",style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: Colors.black,
-                          )),
-                        ),
-                        Tab(
-                          child: Text("Accepted",style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: Colors.black,
-                          )),
-                        ),
+                    child: Container(
+                      child: TabBar(
+                        tabs: [
+                          Tab(
+                            child: Text("Requests",style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: Colors.black,
+                            )),
+                          ),
+                          Tab(
+                            child: Text("Accepted",style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: Colors.black,
+                            )),
+                          ),
 
-                      ],
-                      indicator: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Color.fromARGB(255, 192, 210, 224)
+                        ],
+                        indicator: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Color.fromARGB(255, 192, 210, 224)
+                        ),
+                        dividerColor: Colors.transparent,
+                        labelColor: Colors.white,
+                        unselectedLabelColor: Colors.black,
+                        indicatorSize: TabBarIndicatorSize.tab,
                       ),
-                      dividerColor: Colors.transparent,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: Colors.black,
-                      indicatorSize: TabBarIndicatorSize.tab,
                     ),
                   ),
                 ),
