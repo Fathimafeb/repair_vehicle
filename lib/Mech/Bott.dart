@@ -1,23 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:repair_vehicle/Mech/Servicemech.dart';
-import 'package:repair_vehicle/User/mech_rating.dart';
-import 'package:repair_vehicle/User/user_mech_request_list.dart';
-import 'package:repair_vehicle/User/user_rating.dart';
 
-import 'Mech/mech_home.dart';
-import 'Mech/mech_servicehome.dart';
+import '../User/mech_rating.dart';
+import 'Servicemech.dart';
+import 'mech_home.dart';
 
-
-class Bottomnava2 extends StatefulWidget {
-  const Bottomnava2({super.key});
+class Bott extends StatefulWidget {
+  const Bott({super.key});
 
   @override
-  State<Bottomnava2> createState() => _Bottomnava2State();
+  State<Bott> createState() => _BottState();
 }
 
-class _Bottomnava2State extends State<Bottomnava2> {
+class _BottState extends State<Bott> {
   int _currenSelectedIndex=0;
-  var pages=[Mech_home(id: '',name: '',place: '',service: '',),Servicemech(),Mech_rating()];
+  var pages=[Mech_home(),Servicemech(),Mech_rating()];
 
   @override
   Widget build(BuildContext context) {

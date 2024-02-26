@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:repair_vehicle/Mech/mech_login.dart';
 
 class Mech_Signup extends StatefulWidget {
   const Mech_Signup({super.key});
@@ -106,7 +107,7 @@ class _Mech_SignupState extends State<Mech_Signup> {
                             controller: Phone,
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                labelText: 'Enter password'),
+                                labelText: 'Enter Phonenumber'),
                           ),
                         ),
                       ),
@@ -229,6 +230,9 @@ class _Mech_SignupState extends State<Mech_Signup> {
               InkWell(
                   onTap: (){
                     signUp();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      Mechlogin();
+                    },));
                   },
                   child: Container(
                     height: 50,width: 200,

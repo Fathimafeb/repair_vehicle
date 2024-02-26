@@ -7,7 +7,7 @@ import 'mech_notification.dart';
 import 'mechedit_pr.dart';
 
 class Mech_home extends StatefulWidget {
-  const Mech_home({super.key});
+  const Mech_home({super.key,});
 
   @override
   State<Mech_home> createState() => _Mech_homeState();

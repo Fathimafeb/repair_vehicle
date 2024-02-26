@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:repair_vehicle/Mech/mech_home.dart';
 import 'package:repair_vehicle/Mech/mechstatus_reject.dart';
 
 class Mech_status extends StatefulWidget {
@@ -57,8 +58,8 @@ class _Mech_statusState extends State<Mech_status> {
                   Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("${widget.service}"),
-                      Text("Date"),
-                      Text("Time",style: TextStyle(fontSize: 20),),
+                     // Text("Date"),
+                     // Text("Time",style: TextStyle(fontSize: 20),),
                       Text("${widget.place}",style: TextStyle(fontSize: 20),)
                     ],
                   ),
@@ -71,11 +72,14 @@ class _Mech_statusState extends State<Mech_status> {
               children: [
                Radio(value: "Completed", groupValue: groupValue, onChanged: (value){
                  setState(() {
+
                    groupValue=value!;
                  });
 
+
+
                }),
-                const Text("Completed"),
+                const Text("Completed",),
                 SizedBox(width: 20,),
                 Radio(value: "Not Completed", groupValue: groupValue, onChanged: (value){
                   setState(() {
@@ -123,12 +127,13 @@ class _Mech_statusState extends State<Mech_status> {
                   Payment();
                   Update();
 
+
                 },
                 child: Container(
                   height: 50,
                   width: 280,
                   decoration: BoxDecoration(color: Colors.blue[800],borderRadius: BorderRadius.circular(15)),
-                  child:Text(''),
+                  child:Text('Submit'),
                 ),
               ),
             )
@@ -142,6 +147,7 @@ class _Mech_statusState extends State<Mech_status> {
       'payment':payment.text,
       'name':widget.name,
       'id':widget.id,
+      'service':widget.service
 
     });
   }

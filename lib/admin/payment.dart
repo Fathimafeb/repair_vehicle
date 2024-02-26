@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Payment extends StatefulWidget {
@@ -8,6 +9,7 @@ class Payment extends StatefulWidget {
 }
 
 class _PaymentState extends State<Payment> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold( backgroundColor: Color.fromARGB(255, 192, 210, 224,),
@@ -16,34 +18,39 @@ class _PaymentState extends State<Payment> {
       ),
       body:  Padding(
           padding: const EdgeInsets.all(20),
-          child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: 7,
-              itemBuilder: (context,index){
-                return Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: ListTile(
-                    tileColor: Colors.white,
+          child: FutureBuilder(
+            future: FirebaseFirestore.instance.collection('payment').get(),
+            builder: (context, snapshot) {
+              final userdata = snapshot.data?.docs ?? [];
 
-                    title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Name"),
-                        Text("10/11/2023"),
 
-                      ],
+            return ListView.builder(
+                shrinkWrap: true,
+                itemCount: userdata.length,
+                itemBuilder: (context,index){
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: ListTile(
+                      tileColor: Colors.white,
+            
+                     trailing: Text(''),
+                      subtitle: Column(crossAxisAlignment:CrossAxisAlignment.start ,
+                        children: [
+                          Text(userdata[index]['name']),
+                        //  Text(userdata[index]['service']),
+                          Text(userdata[index]['payment'])
+
+                        ],
+                      ),
                     ),
-                    subtitle: Column(crossAxisAlignment:CrossAxisAlignment.start ,
-                      children: [
-                        Text('₹ 5455/-'),
-                        Text('Service'),
-                        Text('Mechanic Name')
-                      ],
-                    ),
-                  ),
-                );
-              }
+                  );
+                }
+
+            );
+            }
+            ),
           ),
-        ),
+
 
 
 

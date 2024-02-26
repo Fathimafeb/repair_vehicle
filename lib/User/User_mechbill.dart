@@ -4,11 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:repair_vehicle/User/user_payment.dart';
 import 'package:repair_vehicle/User/user_rating.dart';
+import 'package:repair_vehicle/admin/payment.dart';
 
 class User_mechbill extends StatefulWidget {
   String? id;
   String? name;
   String? exp;
+
+
+
+
+
   User_mechbill({super.key, required this.name, required this .id,required this.exp});
 
   @override
@@ -69,6 +75,7 @@ class _User_mechbillState extends State<User_mechbill> {
                         ),
                       ),
                     ),
+
                     Container(
                       height: 30,
                       width: 100,
@@ -133,6 +140,7 @@ class _User_mechbillState extends State<User_mechbill> {
             
                 InkWell(onTap:() {
                   pay();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => User_payment(),));
                 },
                   child: Container(
                     height: 50,
@@ -162,4 +170,6 @@ class _User_mechbillState extends State<User_mechbill> {
     await FirebaseFirestore.instance.collection('Userreq').doc(widget.id)
         .update({"status":4});
   }
+
 }
+

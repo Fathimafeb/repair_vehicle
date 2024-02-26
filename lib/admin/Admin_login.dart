@@ -4,7 +4,7 @@ import 'package:repair_vehicle/admin/homepage.dart';
 import 'package:repair_vehicle/admin/page2.dart';
 
 
-class Adminlogin extends StatefulWidget {
+class Adminlogin extends StatefulWidget{
   const Adminlogin({super.key});
 
   @override

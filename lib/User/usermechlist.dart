@@ -23,7 +23,7 @@ class _UsermechlistState extends State<Usermechlist> {
       stream:  FirebaseFirestore.instance.collection('mechSignup').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
           return Text('failed');

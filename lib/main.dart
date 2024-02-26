@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:repair_vehicle/Bottomnav.dart';
+import 'package:repair_vehicle/Mech/Bott.dart';
 import 'package:repair_vehicle/Mech/Servicemech.dart';
 import 'package:repair_vehicle/Mech/mech_servicehome.dart';
 import 'package:repair_vehicle/Mech/mechstatus_completed.dart';
@@ -13,6 +15,7 @@ import 'package:repair_vehicle/admin/Admin_login.dart';
 import 'package:repair_vehicle/admin/home2.dart';
 import 'package:repair_vehicle/admin/homepage.dart';
 import 'package:repair_vehicle/admin/page2.dart';
+import 'package:repair_vehicle/admin/payment.dart';
 
 import 'Mech/mech_home.dart';
 import 'User/userlogin.dart';
@@ -54,7 +57,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:Mech_home(),
+      home:Page2()
     );
   }
 }

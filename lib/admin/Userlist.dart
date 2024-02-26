@@ -39,23 +39,24 @@ class _UserlistState extends State<Userlist> {
               itemBuilder: (context,index){
                 return Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: ListTile(
-                    tileColor: Colors.white,
-                    leading: InkWell(onTap: () {
+                  child: InkWell(
+                    onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
                         return AdminUserSreen(userid:user[index].id);
                       },));
                     },
-                      child: Container(height: 80,width: 100,
+                    child: ListTile(
+                      tileColor: Colors.white,
+                      leading: Container(height: 80,width: 100,
                           child: Image.asset("Assets/Rectangle 13.png",)),
-                    ),
-                    title:Text( user[index]['Username']),
-                    subtitle: Column(crossAxisAlignment:CrossAxisAlignment.start ,
-                      children: [
+                      title:Text( user[index]['Username']),
+                      subtitle: Column(crossAxisAlignment:CrossAxisAlignment.start ,
+                        children: [
 
-                      Text ( user[index]['Phone']),
-                      Text ( user[index]['Email'],)
-                      ],
+                        Text ( user[index]['Phone']),
+                        Text ( user[index]['Email'],)
+                        ],
+                      ),
                     ),
                   ),
                 );

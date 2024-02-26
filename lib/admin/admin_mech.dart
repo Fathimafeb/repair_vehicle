@@ -259,7 +259,7 @@ class _AdminMechScreenState extends State<AdminMechScreen> {
                             child: TextFormField(
                               readOnly: true,
                               controller: TextEditingController(
-                                  text: snapshot.data?['Location']),
+                                  text: 'qwertyu'),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
 

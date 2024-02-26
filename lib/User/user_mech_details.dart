@@ -10,6 +10,7 @@ class User_mechdeatails extends StatefulWidget {
   String? name;
   String? contact;
   String? exp;
+  
 
   var id;
 
@@ -19,6 +20,7 @@ class User_mechdeatails extends StatefulWidget {
    User_mechdeatails({super.key,required this.name,
      required this.contact,
      required this.exp, required this. id,
+
 
    });
 

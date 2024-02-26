@@ -30,7 +30,7 @@ class _AcceptedlistsState extends State<Acceptedlists> {
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
                     color: Color.fromARGB(255, 192, 210, 224)),
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
+                  padding: const EdgeInsets.all(10),
                   child: Row(mainAxisAlignment:  MainAxisAlignment.spaceEvenly ,
                     children: [
                       Padding(
@@ -51,8 +51,8 @@ class _AcceptedlistsState extends State<Acceptedlists> {
                         children: [
                           Text(
                             "${user[0]['service']}", style: TextStyle(fontSize: 20),),
-                          Text("Date", style: TextStyle(fontSize: 20),),
-                          Text("Time", style: TextStyle(fontSize: 20),),
+                         // Text("Date", style: TextStyle(fontSize: 20),),
+                          //Text("Time", style: TextStyle(fontSize: 20),),
                           Text("${user[0]['place']}", style: TextStyle(fontSize: 20),),
 
                         ],
@@ -101,7 +101,7 @@ class _AcceptedlistsState extends State<Acceptedlists> {
                     ? Container(
                     height: 40,
                     child: Center(
-                      child: Text("payment pending ",
+                      child: Text(" pending ",
                           style: TextStyle()),
                     ),
                     decoration: BoxDecoration(
