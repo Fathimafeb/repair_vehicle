@@ -230,9 +230,8 @@ class _Mech_SignupState extends State<Mech_Signup> {
               InkWell(
                   onTap: (){
                     signUp();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      Mechlogin();
-                    },));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => Mechlogin(),));
+
                   },
                   child: Container(
                     height: 50,width: 200,
